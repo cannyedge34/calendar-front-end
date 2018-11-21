@@ -23,8 +23,3 @@ export default {
   }
 }
 </script>
-<style>
-  .event-item {
-    padding: 2px 0 2px 4px !important;
-  }
-</style>
