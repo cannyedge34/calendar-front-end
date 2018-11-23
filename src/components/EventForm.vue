@@ -20,7 +20,7 @@
 
 <script>
 import DatePicker from 'vuejs-datepicker'
-
+import format from 'date-fns/format'
 export default {
   name: 'EventForm',
   data () {
@@ -35,7 +35,14 @@ export default {
   },
   methods: {
     handleSubmit () {
-      this.$http.post('http://localhost:3000/events', this.event)
+      const startDate = format(this.event.start_date, 'YYYY-MM-DD')
+      const endDate = format(this.event.end_date, 'YYYY-MM-DD')
+      const event = {
+        ...this.event,
+        start_date: startDate,
+        end_date: endDate
+      }
+      this.$http.post('http://localhost:3000/events', event)
         .then(response => {
           this.$emit('update', response.data)
           this.resetValues()
